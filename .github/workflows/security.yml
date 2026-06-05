@@ -56,11 +56,11 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install package
-        run: pip install -e ".[dev]"
+      - name: Install dependencies (no local package)
+        run: pip install pytest pytest-cov ruff mypy
 
       - name: Install pip-audit
         run: pip install pip-audit
 
       - name: Audit dependencies for known vulnerabilities
-        run: pip-audit --strict --skip-editable
+        run: pip-audit --strict
