@@ -1,0 +1,67 @@
+# Security – two independent jobs
+#
+# Jobs
+# ────
+# codeql          – GitHub CodeQL static analysis (runs in the GitHub cloud)
+# dependency-scan – pip-audit scans installed packages against OSV / PyPI Advisory DB
+
+name: Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 3 * * 1"   # every Monday at 03:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  # ── 1. CodeQL ─────────────────────────────────────────────────────────────
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write   # to upload SARIF results
+      actions: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          # Optional: add extra query suites
+          # queries: security-and-quality
+
+      - name: Auto-build (needed for some compiled languages; harmless for Python)
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # ── 2. Dependency vulnerability scan ─────────────────────────────────────
+  dependency-scan:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install package
+        run: pip install -e ".[dev]"
+
+      - name: Install pip-audit
+        run: pip install pip-audit
+
+      - name: Audit dependencies for known vulnerabilities
+        run: pip-audit --strict
+        # --strict causes a non-zero exit code when any vulnerability is found
