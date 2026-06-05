@@ -1,5 +1,9 @@
 # test_python_ci
 
+[![CI](https://github.com/vladiant/test_python_ci/actions/workflows/ci.yml/badge.svg)](https://github.com/vladiant/test_python_ci/actions/workflows/ci.yml)
+[![Release](https://github.com/vladiant/test_python_ci/actions/workflows/release.yml/badge.svg)](https://github.com/vladiant/test_python_ci/actions/workflows/release.yml)
+[![Security](https://github.com/vladiant/test_python_ci/actions/workflows/security.yml/badge.svg)](https://github.com/vladiant/test_python_ci/actions/workflows/security.yml)
+
 A minimal Python package that demonstrates the most important CI/CD features
 using **GitHub Actions**.
 
