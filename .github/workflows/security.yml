@@ -63,5 +63,4 @@ jobs:
         run: pip install pip-audit
 
       - name: Audit dependencies for known vulnerabilities
-        run: pip-audit --strict
-        # --strict causes a non-zero exit code when any vulnerability is found
+        run: pip-audit --strict --skip-editable
