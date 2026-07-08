@@ -26,7 +26,7 @@ pyproject.toml        # project metadata, tool config (ruff, mypy, pytest, cover
 | Linting | [ruff](https://docs.astral.sh/ruff/) |
 | Formatting check | `ruff format --check` |
 | Static type checking | [mypy](https://mypy.readthedocs.io/) (strict mode) |
-| Matrix testing | `actions/setup-python` across Python 3.9 – 3.12 |
+| Matrix testing | `actions/setup-python` across Python 3.10 – 3.12 |
 | Test coverage | `pytest-cov` → XML → [Codecov](https://codecov.io) |
 | Publish to PyPI | `pypa/gh-action-pypi-publish` with OIDC trusted publishing |
 | CodeQL analysis | `github/codeql-action` |
