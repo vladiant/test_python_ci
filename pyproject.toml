@@ -12,10 +12,10 @@ license = { text = "MIT" }
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.4",
+    "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "ruff>=0.4",
-    "mypy>=1.8",
+    "mypy>=2.2.0",
 ]
 
 [tool.setuptools.packages.find]
